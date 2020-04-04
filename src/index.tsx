@@ -33,7 +33,7 @@ interface Values {
 }
 
 const phoneRegExp = /^[+\d]+(?:[\d-.\s()]*)$/;
-const companyEmailRegExp = /@(?!gmail|msn|aol|yahoo|live|inbox).*/i;
+const companyEmailRegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?!gmail|googlemail|msn|aol|yahoo|live|inbox)(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/i;
 
 const BasicForm: React.SFC<{}> = () => (
   <div className="container">
