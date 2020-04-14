@@ -12,4 +12,7 @@ Featuring:
 
 Demo: https://codesandbox.io/s/formik-214-typescript-github-crsnh
 
-TODO: https://duckduckgo.com/?q=formik+DisplayFormikState&ia=web
+TODO:
+accesibiilty:
+https://webaim.org/techniques/forms/
+https://dev.to/ptrin/accessible-formik-forms-2gld

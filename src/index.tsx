@@ -7,7 +7,7 @@ import {
   FormikProps,
   FormikHelpers as FormikActions,
 } from 'formik';
-// import { MoreResources, DisplayFormikState } from "./helper";
+import { DisplayFormikState } from './helper';
 // import axios from 'axios';
 import * as Yup from 'yup';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -19,7 +19,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 interface Values {
   website: string;
   firstName: string;
-  lastName: string;
   email: string;
   phone: string;
   country: string;
@@ -28,8 +27,6 @@ interface Values {
   datepickerField: string;
   conditionalFieldReveal: string;
   conditionalField: string;
-  hasCloudSubscriptions: string;
-  cloudNumber: string;
 }
 
 const phoneRegExp = /^[+\d]+(?:[\d-.\s()]*)$/;
@@ -41,7 +38,6 @@ const BasicForm: React.SFC<{}> = () => (
       initialValues={{
         website: '',
         firstName: '',
-        lastName: '',
         email: '',
         phone: '',
         country: '',
@@ -50,12 +46,9 @@ const BasicForm: React.SFC<{}> = () => (
         datepickerField: '',
         conditionalFieldReveal: '',
         conditionalField: '',
-        hasCloudSubscriptions: '',
-        cloudNumber: '',
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().required('Required field'),
-        lastName: Yup.string().required('Required field'),
         website: Yup.string().url('Must be a valid URL'),
         email: Yup.string()
           .matches(companyEmailRegExp, 'Must be company email')
@@ -87,7 +80,7 @@ const BasicForm: React.SFC<{}> = () => (
       ) => {
         console.log(values);
         setSubmitting(false); // this line should be in the commented success of the axios call
-        setStatus('sent');    // this line should be in the commented success of the axios call
+        setStatus('sent'); // this line should be in the commented success of the axios call
         // axios({
         //   method: 'post',
         //   url: 'https://getform.io/f/wour-form-f',
@@ -100,21 +93,23 @@ const BasicForm: React.SFC<{}> = () => (
         // });
       }}
     >
-      {({
-        status,
-        setStatus,
-        errors,
-        touched,
-        isSubmitting,
-        dirty,
-        handleChange,
-        handleBlur,
-        values,
-        setFieldValue,
-      }: FormikProps<Values>) => (
+      {(
+        {
+          status,
+          setStatus,
+          errors,
+          touched,
+          isSubmitting,
+          dirty,
+          handleChange,
+          handleBlur,
+          values,
+          setFieldValue,
+        }: FormikProps<Values>
+      ) => (
         <Form>
           <div className={status}>
-          <h4>Formik x TypeScript</h4>
+            <h4>Formik x TypeScript</h4>
 
             <fieldset>
               <legend>Your Information</legend>
@@ -179,9 +174,9 @@ const BasicForm: React.SFC<{}> = () => (
                     : 'text-input'
                 }
               />
-            {errors.website && touched.website && (
-              <div className="input-feedback">{errors.website}</div>
-            )}
+              {errors.website && touched.website && (
+                <div className="input-feedback">{errors.website}</div>
+              )}
             </fieldset>
 
             <fieldset>
@@ -243,9 +238,12 @@ const BasicForm: React.SFC<{}> = () => (
                 <option hidden={true}>Select an Option</option>
                 <option value="other">Select me to reveal hidden field</option>
               </Field>
-              {errors.conditionalFieldReveal && touched.conditionalFieldReveal && (
-                <div className="input-feedback">{errors.conditionalFieldReveal}</div>
-              )}
+              {errors.conditionalFieldReveal &&
+                touched.conditionalFieldReveal && (
+                  <div className="input-feedback">
+                    {errors.conditionalFieldReveal}
+                  </div>
+                )}
               <Field
                 id="conditionalField"
                 name="conditionalField"
@@ -260,25 +258,22 @@ const BasicForm: React.SFC<{}> = () => (
                 }
               />
               {errors.conditionalField && touched.conditionalField && (
-                <div className="input-feedback">
-                  {errors.conditionalField}
-                </div>
+                <div className="input-feedback">{errors.conditionalField}</div>
               )}
 
-              <label htmlFor="datepickerField">
-                Date picker
-              </label>
+              <label htmlFor="datepickerField">Date picker</label>
               <DatePicker
                 name="datepickerField"
                 selected={
-                  values.datepickerField ? new Date(values.datepickerField) : null
+                  values.datepickerField
+                    ? new Date(values.datepickerField)
+                    : null
                 }
                 onChange={(val) => setFieldValue('datepickerField', val)}
               />
               {errors.datepickerField && touched.datepickerField && (
                 <div className="input-feedback">{errors.datepickerField}</div>
               )}
-
             </fieldset>
 
             <button
@@ -288,6 +283,7 @@ const BasicForm: React.SFC<{}> = () => (
             >
               Submit {isSubmitting && <span>Sending...</span>}
             </button>
+            <DisplayFormikState {...values} />
           </div>
           {console.log(status)}
           {console.log(errors)}
