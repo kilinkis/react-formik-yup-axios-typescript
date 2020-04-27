@@ -62,6 +62,7 @@ const BasicForm: React.SFC<{}> = () => (
           then: Yup.string().required('Field is required'),
           otherwise: Yup.string(),
         }),
+        // datepickerField: Yup.string().required('Required'),
         conditionalFieldReveal: Yup.string().required('Required field'),
         conditionalField: Yup.string().when('conditionalFieldReveal', {
           is: (val) => val === 'other', // alternatively: (val) => val == true
@@ -143,7 +144,7 @@ const BasicForm: React.SFC<{}> = () => (
                 }
               />
               {errors.email && touched.email && (
-                <div className="input-feedback">{errors.email}</div>
+                <div className="input-feedback" data-testid={`errors-email`}>{errors.email}</div>
               )}
 
               <label htmlFor="phone">Phone number</label>
@@ -272,14 +273,14 @@ const BasicForm: React.SFC<{}> = () => (
                 onChange={(val) => setFieldValue('datepickerField', val)}
               />
               {errors.datepickerField && touched.datepickerField && (
-                <div className="input-feedback">{errors.datepickerField}</div>
+                <div className="input-feedback" data-testid={`errors-datepickerField`}>{errors.datepickerField}</div>
               )}
             </fieldset>
 
             <button
               type="submit"
               disabled={!dirty || isSubmitting}
-              className="air-button air-button air-button--primary"
+              className=""
             >
               Submit {isSubmitting && <span>Sending...</span>}
             </button>
@@ -295,3 +296,4 @@ const BasicForm: React.SFC<{}> = () => (
 );
 
 render(<BasicForm />, document.getElementById('root'));
+// export default BasicForm;

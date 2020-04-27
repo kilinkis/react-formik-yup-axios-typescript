@@ -16,3 +16,5 @@ TODO:
 accesibiilty:
 https://webaim.org/techniques/forms/
 https://dev.to/ptrin/accessible-formik-forms-2gld
+ jest-dom has moved to @testing-library/jest-dom
+ update ts
