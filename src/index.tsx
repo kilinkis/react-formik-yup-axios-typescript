@@ -84,8 +84,8 @@ const BasicForm: React.SFC<{}> = () => (
         setStatus('sent'); // this line should be in the commented success of the axios call
         // axios({
         //   method: 'post',
-        //   url: 'https://getform.io/f/wour-form-f',
-        //   data: { email: values.email, values },
+        //   url: 'https://hooks.zapier.com/hooks/catch/nnn/mmm',
+        //   data: JSON.stringify(values),
         // }).then((r) => {
         //   setSubmitting(false);
         //   // resetForm();
