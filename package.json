@@ -8,7 +8,7 @@
     "@types/react-datepicker": "^2.11.0",
     "@types/react-dom": "16.9.5",
     "@types/yup": "0.26.33",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "formik": "2.1.4",
     "mutationobserver-shim": "^0.3.5",
     "react": "16.12.0",
